@@ -4,12 +4,14 @@
   "description": "Simple turn-based strategy game with friends.",
   "main": "index.js",
   "scripts": {
+    "build": "cd client && elm make src/Main.elm --output=elm.js",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Taylor Allred",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "socket.io": "^3.0.5"
   }
 }
