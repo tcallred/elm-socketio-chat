@@ -5,14 +5,14 @@ const path = require('path')
 const io = require('socket.io')(http)
 const port = 3000
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/index.html'))
+
+app.use(express.static(__dirname + '/public'));
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'index.html'))
 })
 
-// TODO Make this better
-app.get('/elm.js', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/elm.js'))
-})
 
 io.on('connection', (socket) => {
     console.log('a user connected')
@@ -20,6 +20,7 @@ io.on('connection', (socket) => {
         io.emit('chat message', msg);
     });
 })
+
 
 http.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

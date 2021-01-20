@@ -5159,8 +5159,34 @@ var $author$project$Main$messageReceiver = _Platform_incomingPort('messageReceiv
 var $author$project$Main$subscriptions = function (_v0) {
 	return $author$project$Main$messageReceiver($author$project$Main$Recv);
 };
+var $elm$json$Json$Encode$object = function (pairs) {
+	return _Json_wrap(
+		A3(
+			$elm$core$List$foldl,
+			F2(
+				function (_v0, obj) {
+					var k = _v0.a;
+					var v = _v0.b;
+					return A3(_Json_addField, k, v, obj);
+				}),
+			_Json_emptyObject(_Utils_Tuple0),
+			pairs));
+};
 var $elm$json$Json$Encode$string = _Json_wrap;
-var $author$project$Main$sendMessage = _Platform_outgoingPort('sendMessage', $elm$json$Json$Encode$string);
+var $author$project$Main$sendMessage = _Platform_outgoingPort(
+	'sendMessage',
+	function ($) {
+		return $elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					'kind',
+					$elm$json$Json$Encode$string($.kind)),
+					_Utils_Tuple2(
+					'message',
+					$elm$json$Json$Encode$string($.message))
+				]));
+	});
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -5176,7 +5202,8 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{draft: ''}),
-					$author$project$Main$sendMessage(model.draft));
+					$author$project$Main$sendMessage(
+						{kind: 'chat message', message: model.draft}));
 			default:
 				var message = msg.a;
 				return _Utils_Tuple2(

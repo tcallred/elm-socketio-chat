@@ -4,7 +4,7 @@
   "description": "Simple turn-based strategy game with friends.",
   "main": "index.js",
   "scripts": {
-    "build": "cd client && elm make src/Main.elm --output=elm.js",
+    "build:dev": "cd client && elm make src/Main.elm --output=../public/elm-app.js",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
