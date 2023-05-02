@@ -3,7 +3,7 @@
 var flags = null
 
 // Start our Elm application
-var app = Elm.Main.init({ flags: flags })
+var app = Elm.Main.init({ node: document.getElementById('app'), flags: flags })
 
 // Ports go here
 // https://guide.elm-lang.org/interop/ports.html
